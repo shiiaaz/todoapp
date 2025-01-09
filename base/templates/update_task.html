@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Task</title>
+      <!-- Load static files -->
+      {% load static %}
+
+    <link rel="stylesheet" href="{% static 'styles/update.css' %}">
+
+
+  
+</head>
+<body>
+    <h1>Edit Task</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

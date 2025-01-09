@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do App</title>
+
+    <!-- Load static files -->
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/task.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/style2.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>TO DO LIST</h1>
+
+        <!-- Add Task Form -->
+        <div class="add-task">
+            <form method="POST" action="{% url 'add_task' %}">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" name="title" placeholder="Task title" class="task-title-input" required>
+                    <input type="text" name="description" placeholder="Task description" class="task-input" required>
+                    <input type="datetime-local" name="due_date" class="task-input">
+                </div>
+                <button type="submit" class="add-btn"> + </button>
+            </form>
+        </div>
+
+        <!-- Add Filter Section -->
+        <div class="add-filter">
+            <form method="GET" action="{% url 'task-list' %}">
+                <select name="filter" class="filter" onchange="this.form.submit()">
+                    <option value="all" {% if request.GET.filter == 'all' %}selected{% endif %}>Show All</option>
+                    <option value="pending" {% if request.GET.filter == 'pending' %}selected{% endif %}>Pending</option>
+                    <option value="completed" {% if request.GET.filter == 'completed' %}selected{% endif %}>Completed</option>
+                </select>
+            </form>
+        </div>
+
+        <!-- Task Search, Filter, and Clear -->
+        <div class="list-header">
+            <span>List</span>
+            <div class="list-clear">
+                <div class="search-box">
+                    <form method="GET" action="{% url 'task-list' %}">
+                        <input type="text" name="search" placeholder="Search" class="search-input"
+                            value="{{ request.GET.search|default_if_none:'' }}"
+                            onkeypress="if(event.key === 'Enter'){this.form.submit();}">
+                    </form>
+                </div>
+                <form method="GET" action="{% url 'task-list' %}">
+                    <button type="submit" name="clear" value="true" class="clear-btn">Clear</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Task List -->
+        <div class="task-list" id="taskList">
+            {% for task in tasks %}
+            <div class="task-item" data-id="{{ task.id }}">
+                <div class="task-actions">
+                    <form method="POST" action="{% url 'update_task' task.id %}" class="inline-form">
+                        {% csrf_token %}
+                        <button type="submit" class="checkbox {{ task.completed|yesno:'checked,' }}"></button>
+                    </form>
+                </div>
+                <div class="task-title {{ task.completed|yesno:'completed,' }}">
+                    {{ task.title }}
+                </div>
+                <div class="task-text {{ task.completed|yesno:'completed,' }}">
+                    {{ task.description }}
+                </div>
+                <div class="task-due-date">
+                    Due: {{ task.due_date|date:"F d, Y H:i" }}
+                </div>
+                <div class="task-actions">
+                    <form method="GET" action="{% url 'edit_task' task.id %}" class="inline-form">
+                        <button type="submit" class="edit-btn">Edit</button>
+                    </form>
+                    <form method="POST" action="{% url 'delete_task' task.id %}" class="inline-form">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn">🗑</button>
+                    </form>
+                </div>
+            </div>
+            {% empty %}
+            <p>No tasks available.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Reorder Form -->
+        <form method="POST" id="reorderForm" style="display: none;" action="{% url 'task-reorder' %}">
+            {% csrf_token %}
+            <input type="hidden" name="position" id="positionInput">
+        </form>
+
+        <!-- SortableJS Script -->
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <script>
+            var taskList = document.querySelector('.task-list');
+            var reorderForm = document.getElementById("reorderForm");
+            var positionInput = document.getElementById("positionInput");
+
+            let sortable = new Sortable(taskList, {
+                handle: '.task-item',
+                ghostClass: 'dropArea',
+                chosenClass: 'selectedTask',
+                onEnd: function () {
+                    var taskItems = document.querySelectorAll('.task-item');
+                    var positions = [];
+                    taskItems.forEach(function (item) {
+                        positions.push(item.getAttribute('data-position'));
+                    });
+                    positionInput.value = positions.join(',');
+                    reorderForm.submit();
+                }
+            });
+        </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css.login/styles.css">
+    <link rel="stylesheet" href="../static/css.login/form.css">
+    <link rel="stylesheet" href="../static/css.login/input.css">
+    <link rel="stylesheet" href="../static/css.login/button.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>LOGIN</h1>
+            
+            <!-- Form updated to use POST method and csrf_token -->
+            <form method="POST" action="{% url 'login' %}" class="login-form">
+                {% csrf_token %}
+                <div class="input-group"> 
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="username" placeholder="Username" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox">
+                        <span>Remember Me</span>
+                    </label>
+                    <a href="{% url 'forgot_password' %}" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-button">Login</button>
+
+                <p class="register-text">
+                    Don't have an account? 
+                    <a href="{% url 'register' %}" class="register-link">Register</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

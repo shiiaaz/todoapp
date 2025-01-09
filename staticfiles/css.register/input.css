@@ -1,0 +1,31 @@
+.input-group {
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 2.5rem;
+    background: rgba(127, 255, 212, 0.2);
+    border: none;
+    border-radius: 9999px;
+    outline: none;
+    color: #1e293b;
+    font-size: 1rem;
+    backdrop-filter: blur(4px);
+}
+
+.input-group input::placeholder {
+    color: #1e293b;
+}
+
+.input-group input:focus {
+    box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.3);
+}

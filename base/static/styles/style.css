@@ -1,0 +1,243 @@
+:root {
+    --bg-color: #1a1f2e;
+    --text-color: #ffffff;
+    --neon-purple: #a855f7;
+    --neon-glow: 0 0 10px #a855f7;
+    --input-bg: #2a2f3e;
+    --border-color: #4b5563;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    letter-spacing: 0.2em;
+    color: var(--text-color);
+    text-shadow: var(--neon-glow);
+}
+
+.add-task {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+input, select, button {
+    background-color: var(--input-bg);
+    border: 2px solid var(--neon-purple);
+    color: var(--text-color);
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    box-shadow: var(--neon-glow);
+}
+
+.task-title-input,
+.task-input {
+    width: 100%;
+    border-radius: 2rem;
+    padding-left: 1.5rem;
+}
+
+.task-input {
+    max-width: 100%;
+}
+
+.add-btn {
+    order: 1;
+    background-color: var(--neon-purple);
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--neon-glow);
+}
+
+.filter {
+    order: 2;
+    border-radius: 2rem;
+    padding: 0 1.5rem;
+    background-color: var(--input-bg);
+    min-width: 120px;
+    height: 50px;
+    margin-top: 10px;
+}
+
+.list-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-input {
+    width: 100%;
+    border-radius: 2rem;
+    padding-left: 2rem;
+}
+
+.clear-btn {
+    background-color: var(--neon-purple);
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    box-shadow: var(--neon-glow);
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+input:hover, select:hover, button:hover {
+    box-shadow: var(--neon-glow);
+}
+
+.list-clear {
+    display: flex;
+    flex-direction: row;
+}
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .add-task {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .add-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.2rem;
+    }
+
+    .filter {
+        min-width: 170px;
+        height: 40px;
+        margin-top: -1px;
+    }
+
+    .add-filter {
+        display: flex;
+        flex-direction: row;
+        gap: 70vw;
+    }
+
+    .task-item {
+        width: 95vw;
+    }
+    .search-input {
+        width: 85vw;
+    }
+}
+
+@media (max-width: 468px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    input, select, button {
+        font-size: 0.9rem;
+        padding: 0.7rem;
+    }
+
+    .add-btn {
+        width: 2.2rem;
+        height: 2.2rem;
+        font-size: 1rem;
+    }
+
+    .clear-btn {
+        padding: 0.3rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .task-actions {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add-filter {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .filter {
+        width: 85vw;
+    }
+
+    .search-input {
+        width: 100vw;
+    }
+
+    .list-clear {
+        display: flex;
+        flex-direction: column;
+        gap: 10px 0;
+    }
+    .clear-btn {
+        width: 20%;
+    }
+
+    .task-item {
+        width: 100vw;
+    }
+
+    .input-group {
+        width: 100vw;
+    }
+}
