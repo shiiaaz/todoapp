@@ -1,0 +1,131 @@
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    justify-content: center;
+    padding: 2rem;
+}
+
+:root {
+    --bg-color: #1a1f2e;
+    --text-color: #ffffff;
+    --neon-purple: #a855f7;
+    --neon-glow: 0 0 10px #a855f7;
+    --input-bg: #2a2f3e;
+    --border-color: #4b5563;
+}
+
+h1 {
+    text-align: center;
+    margin-left: 50px;
+    margin-bottom: 2rem;
+    letter-spacing: 0.2em;
+    color: var(--text-color);
+    text-shadow: var(--neon-glow);
+    font-size: 40px;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: var(--neon-glow);
+    margin-top: 50px;
+}
+
+form input, form textarea, form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+    border: 0 0 10px #a855f7;
+    font-size: 1rem;
+    background-color: transparent;
+    color: white;
+    box-shadow: var(--neon-glow);
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    color: white;
+    font-size: 1rem;
+}
+
+form button {
+    background-color: #a855f7;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #8b4bf5;
+}
+
+form p {
+    margin-bottom: 10px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+form .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+form input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    appearance: none;
+    border: 2px solid #a855f7;
+    border-radius: 4px;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+form input[type="checkbox"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 22px;
+        text-align: center;
+        margin: 0 auto 1rem;
+    }
+
+    .task-item {
+        padding: 0.5rem;
+    }
+
+    .task-title, .task-text {
+        font-size: 0.9rem;
+    }
+}

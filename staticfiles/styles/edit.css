@@ -109,3 +109,23 @@ form input[type="checkbox"]:checked::before {
     background-color: white;
     clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
 }
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 22px;
+        text-align: center;
+        margin: 0 auto 1rem;
+    }
+
+    .task-item {
+        padding: 0.5rem;
+    }
+
+    .task-title, .task-text {
+        font-size: 0.9rem;
+    }
+}

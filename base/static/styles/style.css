@@ -44,12 +44,6 @@ h1 {
     justify-content: space-between;
 }
 
-.input-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
 
 input, select, button {
     background-color: var(--input-bg);
@@ -71,6 +65,8 @@ input:focus, select:focus {
     width: 100%;
     border-radius: 2rem;
     padding-left: 1.5rem;
+    display: flex;
+    flex-direction: row;
 }
 
 .task-input {
@@ -144,9 +140,17 @@ input:hover, select:hover, button:hover {
     display: flex;
     flex-direction: row;
 }
-@media (max-width: 768px) {
+
+
+@media screen and (max-width: 580px) {
+    .container {
+        padding: 1rem;
+        width: 100%;
+    }
+
     h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .add-task {
@@ -154,90 +158,25 @@ input:hover, select:hover, button:hover {
         gap: 1rem;
     }
 
+    .task-title-input, 
+    .task-input, 
+    .filter, 
     .add-btn {
-        width: 2.5rem;
-        height: 2.5rem;
-        font-size: 1.2rem;
+        width: 100%;
     }
 
-    .filter {
-        min-width: 170px;
-        height: 40px;
-        margin-top: -1px;
-    }
-
-    .add-filter {
-        display: flex;
-        flex-direction: row;
-        gap: 70vw;
-    }
-
-    .task-item {
-        width: 95vw;
-    }
-    .search-input {
-        width: 85vw;
-    }
-}
-
-@media (max-width: 468px) {
-    body {
-        padding: 1rem;
-    }
-
-    h1 {
-        font-size: 1.8rem;
-    }
-
-    input, select, button {
-        font-size: 0.9rem;
-        padding: 0.7rem;
-    }
-
-    .add-btn {
-        width: 2.2rem;
-        height: 2.2rem;
-        font-size: 1rem;
-    }
-
-    .clear-btn {
-        padding: 0.3rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    .task-actions {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .add-filter {
-        display: flex;
-        flex-direction: row;
+    .task-list {
         gap: 0.5rem;
     }
 
-    .filter {
-        width: 85vw;
-    }
-
-    .search-input {
-        width: 100vw;
-    }
-
-    .list-clear {
-        display: flex;
-        flex-direction: column;
-        gap: 10px 0;
-    }
-    .clear-btn {
-        width: 20%;
-    }
-
     .task-item {
-        width: 100vw;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.8rem;
     }
 
-    .input-group {
-        width: 100vw;
+    .task-actions {
+        width: 100%;
+        justify-content: space-between;
     }
 }

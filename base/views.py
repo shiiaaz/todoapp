@@ -13,16 +13,17 @@ from django.utils.dateparse import parse_datetime
 
 # Login view
 def login_view(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
+    if request.method == "POST":  
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if user:
             login(request, user)
-            return redirect('dashboard')  # Redirect to the dashboard
+            return redirect('dashboard')
         else:
-            messages.error(request, 'Invalid username or password')
-    return render(request, 'login.html')
+            messages.error(request, "Invalid username or password")
+    return render(request, 'login.html')  
+
 
 # Register view
 def register_view(request):
@@ -47,6 +48,7 @@ def forgot_password_view(request):
         username = request.POST['username']
         new_password = request.POST['new_password']
         confirm_password = request.POST['confirm_password']
+
         if new_password == confirm_password:
             try:
                 user = User.objects.get(username=username)
@@ -58,8 +60,10 @@ def forgot_password_view(request):
                 messages.error(request, 'User not found')
         else:
             messages.error(request, 'Passwords do not match')
+    
     return render(request, 'password_reset.html')
 
+    
 # Dashboard view
 def dashboard(request):
     if request.user.is_authenticated:
@@ -72,9 +76,8 @@ def add_task(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
-        due_date = request.POST.get('due_date')  # Optional field
+        due_date = request.POST.get('due_date')  
 
-        # Check if due_date is provided and parse it, otherwise set to None
         if due_date:
             due_date = parse_datetime(due_date)
         else:
@@ -107,7 +110,7 @@ def update_task(request, task_id):
 # Delete Task view
 def delete_task(request, task_id):
     try:
-        task = Task.objects.get(id=task_id, user=request.user)  # Ensure the task belongs to the current user
+        task = Task.objects.get(id=task_id, user=request.user)  
         task.delete()  # Delete the task
         return redirect('dashboard')  # Redirect to dashboard after deleting the task
     except Task.DoesNotExist:
@@ -124,16 +127,6 @@ class TaskCreate(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user  # Link the task to the logged-in user
         return super().form_valid(form)
 
-# Task Reorder View
-class TaskReorder(LoginRequiredMixin, View):
-    def post(self, request):
-        position_list = request.POST.get('position').split(',')
-        with transaction.atomic():
-            for i, task_id in enumerate(position_list):
-                task = Task.objects.get(id=task_id)
-                task.position = i
-                task.save()
-        return redirect(reverse_lazy('tasks'))
 
 # Task List View
 class TaskList(LoginRequiredMixin, ListView):
@@ -142,7 +135,7 @@ class TaskList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tasks'] = Task.objects.filter(user=self.request.user).order_by('position')  # Order by position
+        context['tasks'] = Task.objects.filter(user=self.request.user).order_by('position')  
         return context
 
 # Task Update View
@@ -168,7 +161,7 @@ def task_list(request):
     search_query = request.GET.get('search', '')
     filter_value = request.GET.get('filter', 'all')
 
-    # Always filter by the logged-in user
+ 
     tasks = Task.objects.filter(user=request.user)
 
     if filter_value == 'pending':
@@ -192,7 +185,7 @@ def edit_task(request, task_id):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')  # Redirect to the dashboard after editing
+            return redirect('dashboard')  
     else:
         form = TaskForm(instance=task)
 

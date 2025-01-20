@@ -93,34 +93,7 @@
             {% endfor %}
         </div>
 
-        <!-- Reorder Form -->
-        <form method="POST" id="reorderForm" style="display: none;" action="{% url 'task-reorder' %}">
-            {% csrf_token %}
-            <input type="hidden" name="position" id="positionInput">
-        </form>
-
-        <!-- SortableJS Script -->
-        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-        <script>
-            var taskList = document.querySelector('.task-list');
-            var reorderForm = document.getElementById("reorderForm");
-            var positionInput = document.getElementById("positionInput");
-
-            let sortable = new Sortable(taskList, {
-                handle: '.task-item',
-                ghostClass: 'dropArea',
-                chosenClass: 'selectedTask',
-                onEnd: function () {
-                    var taskItems = document.querySelectorAll('.task-item');
-                    var positions = [];
-                    taskItems.forEach(function (item) {
-                        positions.push(item.getAttribute('data-position'));
-                    });
-                    positionInput.value = positions.join(',');
-                    reorderForm.submit();
-                }
-            });
-        </script>
+       
     </div>
 </body>
 

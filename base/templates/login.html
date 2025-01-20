@@ -15,6 +15,13 @@
         <div class="form-container">
             <h1>LOGIN</h1>
             
+            {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        
+
             <!-- Form updated to use POST method and csrf_token -->
             <form method="POST" action="{% url 'login' %}" class="login-form">
                 {% csrf_token %}

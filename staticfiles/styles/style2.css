@@ -17,7 +17,7 @@ h1 {
     letter-spacing: 0.2em;
     color: var(--text-color);
     text-shadow: var(--neon-glow);
-    margin-right: 10px;
+    margin-left: 1000px;
     font-size: 50px;
 }
 
@@ -97,6 +97,7 @@ h1 {
 /* Task Title */
 .task-title {
     font-weight: bold;
+    color: var(--neon-purple);
     font-size: 18px;
     text-align: left;
     padding: 0.5rem;  /* Add padding for consistency */
